@@ -26,20 +26,28 @@
 
                     {{-- アバター画像 --}}
                     <span class="avatar-form image-picker">
-                        <input type="file" name="avatar" class="d-none" accept="image/png,image/jpeg,image/gif" id="avatar" />
+                        <input type="file" name="avatar" class="d-none" accept="image/png,image/jpeg,image/gif"
+                            id="avatar" />
                         <label for="avatar" class="d-inline-block">
-                            <img src="/images/avatar-default.svg" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                            @if (!empty($user->avatar_file_name))
+                                <img src="/storage/avatars/{{ $user->avatar_file_name }}" class="rounded-circle"
+                                    style="object-fit: cover; width: 200px; height: 200px;">
+                            @else
+                                <img src="/images/avatar-default.svg" class="rounded-circle"
+                                    style="object-fit: cover; width: 200px; height: 200px;">
+                            @endif
                         </label>
                     </span>
 
                     {{-- ニックネーム --}}
                     <div class="form-group mt-3">
                         <label for="name">ニックネーム</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                            value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
                         @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
