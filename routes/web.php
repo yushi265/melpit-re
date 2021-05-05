@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mypage\ProfileController;
+use App\Http\Controllers\Mypage\SoldItemsController;
 use App\Http\Controllers\SellController;
 
 
@@ -23,10 +24,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('items/{item}', function () {
+    return "商品詳細";
+})->name('item');
 
 Route::middleware('auth')->group(function () {
         Route::get('sell', [SellController::class, 'showSellForm'])->name('sell');
         Route::post('sell', [SellController::class, 'sellItem'])->name('sell');
+
+        Route::get('sold-items', [SoldItemsController::class, 'showSoldItems'])->name('mypage.sold-items');
     });
 
 Route::prefix('mypage')
