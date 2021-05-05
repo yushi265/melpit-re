@@ -22,6 +22,16 @@ class Item extends Model
         return $this->belongsTo(SecondaryCategory::class);
     }
 
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
+
+    public function condition(): BelongsTo
+    {
+        return $this->belongsTo(ItemCondition::class, 'item_condition_id');
+    }
+
     public function getIsStateSellingAttribute()
     {
         return $this->state === self::STATE_SELLING;
