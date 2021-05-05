@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mypage\ProfileController;
 use App\Http\Controllers\Mypage\SoldItemsController;
 use App\Http\Controllers\SellController;
+use App\Http\Controllers\ItemsController;
 
 
 /*
@@ -17,9 +18,7 @@ use App\Http\Controllers\SellController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('top');
+Route::get('', [ItemsController::class, 'showItems'])->name('top');
 
 Auth::routes();
 
