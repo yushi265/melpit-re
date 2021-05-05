@@ -15,12 +15,16 @@ class CreateAppTables extends Migration
     {
         Schema::create('primary_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('sort_no');
             $table->timestamps();
         });
 
         Schema::create('secondary_categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('primary_category_id');
+            $table->string('name');
+            $table->integer('sort_no');
             $table->timestamps();
 
             $table
@@ -31,6 +35,8 @@ class CreateAppTables extends Migration
 
         Schema::create('item_conditions', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('sort_no');
             $table->timestamps();
         });
 

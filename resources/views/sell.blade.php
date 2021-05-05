@@ -27,9 +27,11 @@
                     {{-- 商品画像 --}}
                     <div>商品画像</div>
                     <span class="item-image-form image-picker">
-                        <input type="file" name="item-image" class="d-none" accept="image/png,image/jpeg,image/gif" id="item-image" />
+                        <input type="file" name="item-image" class="d-none" accept="image/png,image/jpeg,image/gif"
+                            id="item-image" />
                         <label for="item-image" class="d-inline-block" role="button">
-                            <img src="/images/item-image-default.png" style="object-fit: cover; width: 300px; height: 300px;">
+                            <img src="/images/item-image-default.png"
+                                style="object-fit: cover; width: 300px; height: 300px;">
                         </label>
                     </span>
                     @error('item-image')
@@ -41,22 +43,25 @@
                     {{-- 商品名 --}}
                     <div class="form-group mt-3">
                         <label for="name">商品名</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                            value="{{ old('name') }}" required autocomplete="name" autofocus>
                         @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
                     {{-- 商品の説明 --}}
                     <div class="form-group mt-3">
                         <label for="description">商品の説明</label>
-                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description" autofocus>{{ old('description') }}</textarea>
+                        <textarea id="description" class="form-control @error('description') is-invalid @enderror"
+                            name="description" required autocomplete="description"
+                            autofocus>{{ old('description') }}</textarea>
                         @error('description')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
@@ -64,36 +69,52 @@
                     <div class="form-group mt-3">
                         <label for="category">カテゴリ</label>
                         <select name="category" class="custom-select form-control @error('category') is-invalid @enderror">
-                            {{-- 次のパートで実装します --}}
+                            @foreach ($categories as $category)
+                                <optgroup label="{{ $category->name }}">
+                                    @foreach ($category->secondaryCategories as $secondary)
+                                        <option value="{{ $secondary->id }}"
+                                            {{ old('category') == $secondary->id ? 'selected' : '' }}>
+                                            {{ $secondary->name }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
                         </select>
                         @error('category')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
                     {{-- 商品の状態 --}}
                     <div class="form-group mt-3">
                         <label for="condition">商品の状態</label>
-                        <select name="condition" class="custom-select form-control @error('condition') is-invalid @enderror">
-                            {{-- 次のパートで実装します --}}
+                        <select name="condition"
+                            class="custom-select form-control @error('condition') is-invalid @enderror">
+                            @foreach ($conditions as $condition)
+                                <option value="{{ $condition->id }}"
+                                    {{ old('condition') == $condition->id ? 'selected' : '' }}>
+                                    {{ $condition->name }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('condition')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
                     {{-- 販売価格 --}}
                     <div class="form-group mt-3">
                         <label for="price">販売価格</label>
-                        <input id="price" type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
+                        <input id="price" type="number" class="form-control @error('price') is-invalid @enderror"
+                            name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
                         @error('price')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
