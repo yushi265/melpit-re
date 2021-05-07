@@ -23,7 +23,6 @@ Route::get('', [ItemsController::class, 'showItems'])->name('top');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('items/{item}', [ItemsController::class, 'showItemDetail'])->name('item');
 
 Route::middleware('auth')->group(function () {
