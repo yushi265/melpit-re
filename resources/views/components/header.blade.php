@@ -13,14 +13,19 @@
                             <select class="custom-select" name="category">
                                 <option value="">全て</option>
                                 @foreach ($categories as $category)
-                                    <option value="primary:{{$category->id}}" class="font-weight-bold" {{ $defaults['category'] == "primary:" . $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                    <option value="primary:{{ $category->id }}" class="font-weight-bold"
+                                        {{ $defaults['category'] == 'primary:' . $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}</option>
                                     @foreach ($category->secondaryCategories as $secondary)
-                                        <option value="secondary:{{$secondary->id}}" {{ $defaults['category'] == "secondary:" . $secondary->id ? 'selected' : ''}}>　{{$secondary->name}}</option>
+                                        <option value="secondary:{{ $secondary->id }}"
+                                            {{ $defaults['category'] == 'secondary:' . $secondary->id ? 'selected' : '' }}>
+                                            {{ $secondary->name }}</option>
                                     @endforeach
                                 @endforeach
                             </select>
                         </div>
-                        <input type="text" name="keyword" class="form-control" value="{{$defaults['keyword']}}" aria-label="Text input with dropdown button" placeholder="キーワード検索">
+                        <input type="text" name="keyword" class="form-control" value="{{ $defaults['keyword'] }}"
+                            aria-label="Text input with dropdown button" placeholder="キーワード検索">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-outline-dark">
                                 <i class="fas fa-search"></i>
@@ -64,12 +69,17 @@
                                 <i class="fas fa-store-alt text-left" style="width: 30px"></i>出品した商品
                             </a>
 
+                            <a class="dropdown-item" href="{{ route('mypage.bought-items') }}">
+                                <i class="fas fa-shopping-bag text-left" style="width: 30px"></i>購入した商品
+                            </a>
+
                             <a class="dropdown-item" href="{{ route('mypage.edit-profile') }}">
                                 <i class="far fa-address-card text-left" style="width: 30px"></i>プロフィール編集
                             </a>
 
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                      document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                                          document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt text-left" style="width: 30px"></i>ログアウト
                             </a>
 

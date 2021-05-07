@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mypage\ProfileController;
 use App\Http\Controllers\Mypage\SoldItemsController;
+use App\Http\Controllers\Mypage\BoughtItemsController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\ItemsController;
 
@@ -41,5 +42,6 @@ Route::prefix('mypage')
     ->middleware('auth')
     ->group(function () {
         Route::get('edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('edit-profile');
+        Route::get('bought-items', [BoughtItemsController::class, 'showBoughtItems'])->name('bought-items');
         Route::post('edit-profile', [ProfileController::class, 'editProfile'])->name('edit-profile');
     });
