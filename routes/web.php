@@ -26,19 +26,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('items/{item}', [ItemsController::class, 'showItemDetail'])->name('item');
 
 Route::middleware('auth')->group(function () {
-        Route::get('items/{item}/buy', function () { return "商品購入画面";})->name('item.buy');
+    Route::get('items/{item}/buy', [ItemsController::class, 'showBuyItemForm'])->name('item.buy');
+    Route::post('items/{item}/buy', [ItemsController::class, 'buyItems'])->name('item.buy');
 
-        Route::get('sell', [SellController::class, 'showSellForm'])->name('sell');
-        Route::post('sell', [SellController::class, 'sellItem'])->name('sell');
+    Route::get('sell', [SellController::class, 'showSellForm'])->name('sell');
+    Route::post('sell', [SellController::class, 'sellItem'])->name('sell');
 
-        Route::get('sold-items', [SoldItemsController::class, 'showSoldItems'])->name('mypage.sold-items');
-    });
+    Route::get('sold-items', [SoldItemsController::class, 'showSoldItems'])->name('mypage.sold-items');
+});
 
 Route::prefix('mypage')
-        ->namespace('MyPage')
-        ->name('mypage.')
-        ->middleware('auth')
-        ->group(function () {
-            Route::get('edit-profile',[ProfileController::class, 'showProfileEditForm'])->name('edit-profile');
-            Route::post('edit-profile', [ProfileController::class, 'editProfile'])->name('edit-profile');
-        });
+    ->namespace('MyPage')
+    ->name('mypage.')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('edit-profile');
+        Route::post('edit-profile', [ProfileController::class, 'editProfile'])->name('edit-profile');
+    });
